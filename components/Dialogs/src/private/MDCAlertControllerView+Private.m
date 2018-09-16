@@ -93,6 +93,8 @@ static const CGFloat MDCDialogMessageOpacity = 0.54f;
 
     _actionButtons = [[NSMutableArray alloc] init];
 
+    _titleAlignment = NSTextAlignmentNatural;
+
     [self setNeedsLayout];
   }
 
