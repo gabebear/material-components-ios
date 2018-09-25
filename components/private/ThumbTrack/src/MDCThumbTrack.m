@@ -167,7 +167,8 @@ static inline CGFloat DistanceFromPointToPoint(CGPoint point1, CGPoint point2) {
 
   // Attributes to handle interaction. To associate touches to previous touches, we keep a reference
   // to the current touch, since the system reuses the same memory address when sending subsequent
-  // touches for the same gesture. If _currentTouch == nil, then there's no interaction going on.
+  // touches for the same gesture when exclusiveTouch = YES. If _currentTouch == nil, then there's no
+  // interaction going on.
   UITouch *_currentTouch;
   BOOL _isDraggingThumb;
   BOOL _didChangeValueDuringPan;
@@ -186,6 +187,7 @@ static inline CGFloat DistanceFromPointToPoint(CGPoint point1, CGPoint point2) {
   self = [super initWithFrame:frame];
   if (self) {
     self.userInteractionEnabled = YES;
+    self.exclusiveTouch = YES;  // Touches from other handlers can invalidate _currentTouch logic.
     [super setMultipleTouchEnabled:NO];  // We only want one touch event at a time
     _continuousUpdateEvents = YES;
     _lastDispatchedValue = _value;
